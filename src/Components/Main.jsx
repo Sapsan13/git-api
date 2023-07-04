@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Routes, Route, Router, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Repositories from "./Repositories";
 
 import {
@@ -26,12 +26,10 @@ function Main() {
     queryFn: () =>
       fetch("https://api.github.com/users/Sapsan13", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
         },
       }).then((data) => data.json()),
   });
-
-  // console.log(data.gits_url);
 
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
