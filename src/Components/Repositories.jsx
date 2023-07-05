@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Kard from "./Card";
 // import { Direction } from "tabler-icons-react";
-import { Flex } from "@mantine/core";
+import { Box, Button, Flex } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 export const Repositories = () => {
   //REpo fetch
@@ -10,7 +11,7 @@ export const Repositories = () => {
     queryFn: () =>
       fetch("https://api.github.com/user/repos", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
         },
       })
         .then((data) => data.json())
@@ -27,7 +28,7 @@ export const Repositories = () => {
     queryFn: () =>
       fetch("https://api.github.com/users/Sapsan13/starred", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
         },
       }).then((data) => data.json()),
   });
@@ -39,6 +40,47 @@ export const Repositories = () => {
 
   return (
     <Flex direction="column" gap="md">
+      <Box
+        sx={(theme) => ({
+          backgroundColor:
+            theme.colorScheme === "dark"
+              ? theme.colors.dark[6]
+              : theme.colors.gray[0],
+          textAlign: "center",
+          padding: theme.spacing.xl,
+          borderRadius: theme.radius.md,
+          cursor: "pointer",
+
+          "&:hover": {
+            backgroundColor:
+              theme.colorScheme === "dark"
+                ? theme.colors.dark[5]
+                : theme.colors.gray[1],
+          },
+        })}
+      >
+        <Flex justify="space-between" align="center">
+          <Button
+            component={Link}
+            to={"/repoCreate"}
+            variant="light"
+            color="blue"
+            radius="xl"
+            size="md"
+          >
+            Add New Repository
+          </Button>
+          {/* <Button variant="light" color="blue" radius="xl" size="md">
+            Delete Repository
+          </Button> */}
+          <Button variant="light" color="blue" radius="xl" size="md">
+            Settings
+          </Button>
+          <Button variant="light" color="blue" radius="xl" size="md">
+            Settings
+          </Button>
+        </Flex>
+      </Box>
       {repositories.map((item) => {
         return (
           <Kard

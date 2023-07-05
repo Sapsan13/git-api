@@ -21,6 +21,7 @@
     "@mantine/notifications": "^6.0.15",
     "@mantine/nprogress": "^6.0.15",
     "@mantine/prism": "^6.0.15",
+    "@mantine/rte": "^5.10.5",
     "@mantine/spotlight": "^6.0.15",
     "@mantine/tiptap": "^6.0.15",
     "@tabler/icons-react": "^2.23.0",

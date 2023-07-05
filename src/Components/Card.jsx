@@ -1,6 +1,7 @@
 import { Card, Text, Button, Flex, Badge } from "@mantine/core";
 import { IconStar } from "@tabler/icons-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { StarOff } from "tabler-icons-react";
 
 function Kard({ repository: item, isStarred }) {
@@ -33,6 +34,8 @@ function Kard({ repository: item, isStarred }) {
       padding="sm"
       radius="md"
       withBorder
+      component={Link}
+      to="/repo/detail"
     >
       <Flex
         gap="md"
@@ -48,6 +51,7 @@ function Kard({ repository: item, isStarred }) {
               item.private ? "Private" : "Public"
             }`}</Badge>
           </Flex>
+
           <Flex align={"center"} gap="xs">
             {item.language ? <Text fz="xs">{item.language} </Text> : false}
             <Text fz="xs">{`${item.updated_at.toLocaleDateString()}`}</Text>
