@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 import Repositories from "./Repositories";
 import CreateRepository from "./CreateRepository";
 import RepoDetail from "./RepoDetail";
@@ -9,6 +9,7 @@ import { AppShell, useMantineTheme } from "@mantine/core";
 import LeftNavBar from "./Layout/LeftNavBar";
 import Futer from "./Layout/Futer";
 import Head from "./Layout/Head";
+import { personalKey } from "./personalKey";
 
 function Main() {
   // Access the client
@@ -20,7 +21,7 @@ function Main() {
     queryFn: () =>
       fetch("https://api.github.com/users/Sapsan13", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `Bearer ${personalKey}`,
         },
       }).then((data) => data.json()),
   });
@@ -49,6 +50,7 @@ function Main() {
         <Route path="/repositories" element={<Repositories />} />
         <Route path="/" element={<p>Home</p>} />
         <Route path="/repoCreate" element={<CreateRepository />} />
+        <Route path="/repos/:item" element={<RepoDetail />} />
       </Routes>
     </AppShell>
   );

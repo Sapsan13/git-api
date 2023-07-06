@@ -1,11 +1,9 @@
 import { Avatar, Flex, Navbar, NavLink } from "@mantine/core";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const LeftNavBar = ({ repoData: data }) => {
-  const [opened, setOpened] = useState(false);
   return (
-    <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 210 }}>
+    <Navbar p="md" hiddenBreakpoint="sm" width={{ sm: 210 }}>
       <Flex
         direction="column"
         justify="space-between"

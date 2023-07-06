@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import Kard from "./Card";
-// import { Direction } from "tabler-icons-react";
 import { Box, Button, Flex } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { personalKey } from "./personalKey";
 
 export const Repositories = () => {
-  //REpo fetch
+  //Repo fetch
   const { data: repositories } = useQuery({
     queryKey: ["repositories"],
     queryFn: () =>
       fetch("https://api.github.com/user/repos", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `Bearer ${personalKey}`,
         },
       })
         .then((data) => data.json())
@@ -28,7 +28,7 @@ export const Repositories = () => {
     queryFn: () =>
       fetch("https://api.github.com/users/Sapsan13/starred", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `Bearer ${personalKey}`,
         },
       }).then((data) => data.json()),
   });
@@ -37,7 +37,6 @@ export const Repositories = () => {
   });
 
   if (!repositories) return;
-
   return (
     <Flex direction="column" gap="md">
       <Box

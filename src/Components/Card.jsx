@@ -1,7 +1,7 @@
 import { Card, Text, Button, Flex, Badge } from "@mantine/core";
 import { IconStar } from "@tabler/icons-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { StarOff } from "tabler-icons-react";
 
 function Kard({ repository: item, isStarred }) {
@@ -13,7 +13,7 @@ function Kard({ repository: item, isStarred }) {
         {
           method: isStarred ? "DELETE" : "PUT",
           headers: {
-            Authorization: "Bearer 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",
+            Authorization: `Bearer ${personalKey}`,
           },
         }
       );
@@ -23,7 +23,6 @@ function Kard({ repository: item, isStarred }) {
       queryClient.invalidateQueries({ queryKey: ["star"] });
     },
   });
-  // console.log(repo, 123);
 
   return (
     <Card
@@ -35,8 +34,9 @@ function Kard({ repository: item, isStarred }) {
       radius="md"
       withBorder
       component={Link}
-      to="/repo/detail"
+      to={`/repos/${item.name}`}
     >
+      {console.log(item)}
       <Flex
         gap="md"
         justify="space-between"
@@ -73,7 +73,6 @@ function Kard({ repository: item, isStarred }) {
           Star
         </Button>
       </Flex>
-
       {/* <Button variant="light" color="blue" fullWidth mt="md" radius="md">
         Book classic tour now
       </Button> */}
