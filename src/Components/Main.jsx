@@ -46,11 +46,11 @@ function Main() {
       header={<Head />}
     >
       <Routes>
-        <Route path="/repo/detail" element={<RepoDetail />} />
+        {/* <Route path="/repo/detail" element={<RepoDetail />} /> */}
         <Route path="/repositories" element={<Repositories />} />
         <Route path="/" element={<p>Home</p>} />
         <Route path="/repoCreate" element={<CreateRepository />} />
-        <Route path="/repos/:item" element={<RepoDetail />} />
+        <Route path="/repos/:item" element={<RepoDetail data={data} />} />
       </Routes>
     </AppShell>
   );

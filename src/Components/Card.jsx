@@ -36,7 +36,7 @@ function Kard({ repository: item, isStarred }) {
       component={Link}
       to={`/repos/${item.name}`}
     >
-      {console.log(item)}
+      {/* {console.log(item)} */}
       <Flex
         gap="md"
         justify="space-between"

@@ -1,8 +1,11 @@
 import { Box, Button, Checkbox, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
+import { personalKey } from "./personalKey";
+import { useNavigate } from "react-router-dom";
 
 const CreateRepository = () => {
+  const navigate = useNavigate();
   const form = useForm({
     initialValues: {
       name: "",
@@ -12,10 +15,9 @@ const CreateRepository = () => {
   });
   const mutation = useMutation({
     mutationFn: (values) => {
-      //   console.log(values);
       return fetch("https://api.github.com/user/repos", {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `Bearer ${personalKey}`,
         },
         method: "POST",
         body: JSON.stringify(values),
@@ -24,6 +26,7 @@ const CreateRepository = () => {
     onSuccess: () => {
       console.log("Success");
       queryClient.invalidateQueries({ queryKey: ["star"] });
+      navigate("/repositories");
     },
   });
 
@@ -54,7 +57,7 @@ const CreateRepository = () => {
         />
 
         <Group position="right" mt="xl">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Add new Repository</Button>
         </Group>
       </form>
     </Box>
