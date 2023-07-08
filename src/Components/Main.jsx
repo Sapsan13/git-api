@@ -10,6 +10,7 @@ import LeftNavBar from "./Layout/LeftNavBar";
 import Futer from "./Layout/Futer";
 import Head from "./Layout/Head";
 import { personalKey } from "./personalKey";
+import { AppRoutes } from "../routes";
 
 function Main() {
   // Access the client
@@ -45,13 +46,15 @@ function Main() {
       footer={<Futer repoData={data} />}
       header={<Head />}
     >
-      <Routes>
-        {/* <Route path="/repo/detail" element={<RepoDetail />} /> */}
+      <AppRoutes />
+      {/* <Routes>
         <Route path="/repositories" element={<Repositories />} />
         <Route path="/" element={<p>Home</p>} />
         <Route path="/repoCreate" element={<CreateRepository />} />
-        <Route path="/repos/:item" element={<RepoDetail data={data} />} />
-      </Routes>
+        <Route path="/repos/:item" element={<RepoDetail />}>
+          <DetailRoutes />
+        </Route>
+      </Routes> */}
     </AppShell>
   );
 }

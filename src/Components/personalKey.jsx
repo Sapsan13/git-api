@@ -1,1 +1,1 @@
-export const personalKey = "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";
+export const personalKey = "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";

@@ -5,8 +5,17 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { personalKey } from "./personalKey";
+import IssueCreate from "./IssueCreate";
 
 const RepoDetail = () => {
   const navigate = useNavigate();
@@ -46,6 +55,19 @@ const RepoDetail = () => {
   if (!data) return;
   return (
     <>
+      <Outlet />
+      <Button
+        component={Link}
+        to="/repos/createissue"
+        align="center"
+        variant="light"
+        color="blue"
+        radius="xl"
+        size="sm"
+        // onClick={deleteRepoHandler}
+      >
+        Create new Issue
+      </Button>
       <Tabs variant="outline" radius="lg" defaultValue="code">
         <Tabs.List>
           <Tabs.Tab value="code" icon={<IconPhoto size="0.8rem" />}>
@@ -54,10 +76,11 @@ const RepoDetail = () => {
           <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" />}>
             Issues
           </Tabs.Tab>
-          <Tabs.Tab value="settings">Settings</Tabs.Tab>
+          {/* <Tabs.Tab value="settings">Settings</Tabs.Tab> */}
         </Tabs.List>
 
         <Tabs.Panel value="code" pt="xs">
+          {/* TODO: render detail component */}
           <Card align="center" mah="50px" shadow="sm" padding="xs" radius="md">
             <Text align="center" weight={500}>
               <Flex direction="row" justify="space-between">
@@ -86,7 +109,14 @@ const RepoDetail = () => {
         </Tabs.Panel>
 
         <Tabs.Panel value="messages" pt="xs">
-          Issues
+          {/* TODO: render issues component */}
+          <Card align="center" mah="500px" shadow="sm" padding="xs" radius="md">
+            <Text align="center" weight={500}>
+              <Flex direction="row" justify="space-between">
+                ISSUES TABLE
+              </Flex>
+            </Text>
+          </Card>
         </Tabs.Panel>
 
         <Tabs.Panel value="settings" pt="xs">

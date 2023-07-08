@@ -3,6 +3,8 @@ import Kard from "./Card";
 import { Box, Button, Flex } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { personalKey } from "./personalKey";
+import { Input } from "@mantine/core";
+import { IconAt, IconSpyOff } from "@tabler/icons-react";
 
 export const Repositories = () => {
   //Repo fetch
@@ -59,24 +61,24 @@ export const Repositories = () => {
         })}
       >
         <Flex justify="space-between" align="center">
+          {/* <Button variant="light" color="blue" radius="xl" size="md">
+            Delete Repository
+          </Button> */}
+          <Input
+            icon={<IconSpyOff />}
+            placeholder="Search"
+            radius="md"
+            size="lg"
+          />
           <Button
             component={Link}
-            to={"/repoCreate"}
+            to={"new"}
             variant="light"
             color="blue"
             radius="xl"
             size="md"
           >
             Add New Repository
-          </Button>
-          {/* <Button variant="light" color="blue" radius="xl" size="md">
-            Delete Repository
-          </Button> */}
-          <Button variant="light" color="blue" radius="xl" size="md">
-            Settings
-          </Button>
-          <Button variant="light" color="blue" radius="xl" size="md">
-            Settings
           </Button>
         </Flex>
       </Box>

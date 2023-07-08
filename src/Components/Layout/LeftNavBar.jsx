@@ -10,11 +10,7 @@ const LeftNavBar = ({ repoData: data }) => {
         style={{ height: "100%" }}
       >
         <div>
-          <NavLink
-            label="Get Repositories"
-            component={Link}
-            to="/repositories"
-          />
+          <NavLink label="Repositories" component={Link} to="/repositories" />
         </div>
 
         <Flex gap="sm">
