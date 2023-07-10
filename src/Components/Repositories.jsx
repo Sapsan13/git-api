@@ -4,7 +4,7 @@ import { Box, Button, Flex } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { personalKey } from "./personalKey";
 import { Input } from "@mantine/core";
-import { IconAt, IconSpyOff } from "@tabler/icons-react";
+import { IconSpyOff } from "@tabler/icons-react";
 
 export const Repositories = () => {
   //Repo fetch

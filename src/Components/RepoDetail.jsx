@@ -15,20 +15,21 @@ import {
   useParams,
 } from "react-router-dom";
 import { personalKey } from "./personalKey";
-import IssueCreate from "./IssueCreate";
+import IssueCreate from "./Issues/IssueCreate";
 
 const RepoDetail = () => {
   const navigate = useNavigate();
-  const { item } = useParams();
-  const { data } = useQuery({
-    queryKey: ["repoDetail", item],
+  const { itemId } = useParams();
+  const { data, isSuccess } = useQuery({
+    queryKey: ["repoDetail", itemId],
     queryFn: () =>
-      fetch(`https://api.github.com/repos/Sapsan13/${item}`, {
+      fetch(`https://api.github.com/repos/Sapsan13/${itemId}`, {
         headers: {
           Authorization: `Bearer ${personalKey}`,
         },
       }).then((data) => data.json()),
   });
+  // console.log(data, "repoDetail");
 
   const mutation = useMutation({
     mutationFn: () => {
@@ -42,7 +43,7 @@ const RepoDetail = () => {
     onSuccess: () => {
       console.log("Success Deleted");
       // queryClient.invalidateQueries({ queryKey: ["star"] });
-      navigate("/repositories");
+      navigate("/repos");
     },
   });
 
@@ -52,13 +53,13 @@ const RepoDetail = () => {
     mutation.mutate();
   };
 
-  if (!data) return;
+  if (!data || !isSuccess) return;
   return (
     <>
       <Outlet />
       <Button
         component={Link}
-        to="/repos/createissue"
+        to={`/repos/${itemId}/createissue`}
         align="center"
         variant="light"
         color="blue"

@@ -10,8 +10,9 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { Button, Input } from "@mantine/core";
 import { IconSTurnDown } from "@tabler/icons-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { personalKey } from "./personalKey";
-import { useParams } from "react-router-dom";
+import { personalKey } from "../personalKey";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRef } from "react";
 
 const content = ``;
 const IssueCreate = () => {
@@ -28,23 +29,40 @@ const IssueCreate = () => {
     ],
     content,
   });
-
-  //   const navigate = useNavigate();
-  const { item } = useParams();
-  const { data } = useQuery({
-    queryKey: ["repoDetail", item],
-    queryFn: () =>
-      fetch(`https://api.github.com/repos/Sapsan13/${item}`, {
+  // console.log(editor);
+  const navigate = useNavigate();
+  // const mutation = useMutation();
+  const { itemId } = useParams();
+  const titleRef = useRef(null);
+  const textRef = useRef(null);
+  const mutation = useMutation({
+    mutationFn: () => {
+      return fetch(`https://api.github.com/repos/Sapsan13/${itemId}/issues`, {
         headers: {
           Authorization: `Bearer ${personalKey}`,
         },
-      }).then((data) => data.json()),
+        method: "POST",
+        body: JSON.stringify({
+          title: titleRef.current.value,
+          body: textRef.current.innerText,
+        }),
+      });
+    },
+    onSuccess: () => {
+      console.log("SuccessIssue");
+      navigate("/repos");
+    },
   });
-  console.log(item);
+  // console.log(data, "ISSUES");
+  if (!textRef) return;
   return (
     <>
-      <Input icon={<IconSTurnDown />} placeholder="Issue title" />
-      <RichTextEditor editor={editor}>
+      <Input
+        icon={<IconSTurnDown />}
+        placeholder="Issue title"
+        ref={titleRef}
+      />
+      <RichTextEditor editor={editor} ref={textRef}>
         <RichTextEditor.Toolbar sticky stickyOffset={60}>
           <RichTextEditor.ControlsGroup>
             <RichTextEditor.Bold />
@@ -87,7 +105,7 @@ const IssueCreate = () => {
 
         <RichTextEditor.Content maw="990px" />
       </RichTextEditor>
-      <Button type="submit">Add an issue</Button>
+      <Button onClick={() => mutation.mutate()}>Add an issue </Button>
     </>
   );
 };

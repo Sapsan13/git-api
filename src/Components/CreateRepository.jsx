@@ -25,8 +25,7 @@ const CreateRepository = () => {
     },
     onSuccess: () => {
       console.log("Success");
-      queryClient.invalidateQueries({ queryKey: ["star"] });
-      navigate("/repositories");
+      navigate("/repos");
     },
   });
 

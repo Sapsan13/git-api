@@ -30,11 +30,11 @@ export const appRoutes: RouteObject[] = [
         element: <CreateRepository />,
       },
       {
-        path: ":item",
+        path: ":itemId",
         element: <RepoDetail />,
         children: [
           {
-            path: "issues",
+            path: "createissue",
             element: <IssueCreate />,
           },
         ],

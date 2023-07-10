@@ -6,6 +6,7 @@ import { StarOff } from "tabler-icons-react";
 
 function Kard({ repository: item, isStarred }) {
   const queryClient = useQueryClient();
+  const { itemId } = useParams();
   const mutation = useMutation({
     mutationFn: () => {
       return fetch(
@@ -23,7 +24,7 @@ function Kard({ repository: item, isStarred }) {
       queryClient.invalidateQueries({ queryKey: ["star"] });
     },
   });
-
+  // console.log(item, "ITEM");
   return (
     <Card
       key={item.id}
@@ -36,7 +37,7 @@ function Kard({ repository: item, isStarred }) {
       component={Link}
       to={`/repos/${item.name}`}
     >
-      {/* {console.log(item)} */}
+      {/* {console.log(itemId, "IDITEM")} */}
       <Flex
         gap="md"
         justify="space-between"
@@ -73,9 +74,6 @@ function Kard({ repository: item, isStarred }) {
           Star
         </Button>
       </Flex>
-      {/* <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-        Book classic tour now
-      </Button> */}
     </Card>
   );
 }

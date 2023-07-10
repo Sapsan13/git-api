@@ -1,11 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { Routes, Route, Link, useParams } from "react-router-dom";
-import Repositories from "./Repositories";
-import CreateRepository from "./CreateRepository";
-import RepoDetail from "./RepoDetail";
-
+import { useQuery } from "@tanstack/react-query";
 import { AppShell, useMantineTheme } from "@mantine/core";
-
 import LeftNavBar from "./Layout/LeftNavBar";
 import Futer from "./Layout/Futer";
 import Head from "./Layout/Head";
@@ -13,9 +7,6 @@ import { personalKey } from "./personalKey";
 import { AppRoutes } from "../routes";
 
 function Main() {
-  // Access the client
-  //   const queryClient = useQueryClient();
-
   // Queries
   const { data } = useQuery({
     queryKey: ["todos"],
@@ -47,14 +38,6 @@ function Main() {
       header={<Head />}
     >
       <AppRoutes />
-      {/* <Routes>
-        <Route path="/repositories" element={<Repositories />} />
-        <Route path="/" element={<p>Home</p>} />
-        <Route path="/repoCreate" element={<CreateRepository />} />
-        <Route path="/repos/:item" element={<RepoDetail />}>
-          <DetailRoutes />
-        </Route>
-      </Routes> */}
     </AppShell>
   );
 }
