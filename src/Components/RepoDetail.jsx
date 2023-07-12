@@ -5,6 +5,7 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
+
 import {
   Link,
   Navigate,
@@ -15,7 +16,8 @@ import {
   useParams,
 } from "react-router-dom";
 import { personalKey } from "./personalKey";
-import IssueCreate from "./Issues/IssueCreate";
+import CodeTabCard from "./Layout/CodeTabCard";
+import BrowseIssuesTab from "./Layout/BrowseIssueTabs";
 
 const RepoDetail = () => {
   const navigate = useNavigate();
@@ -69,7 +71,12 @@ const RepoDetail = () => {
       >
         Create new Issue
       </Button>
-      <Tabs variant="outline" radius="lg" defaultValue="code">
+      <Tabs
+        variant="outline"
+        radius="lg"
+        keepMounted={false}
+        defaultValue="code"
+      >
         <Tabs.List>
           <Tabs.Tab value="code" icon={<IconPhoto size="0.8rem" />}>
             Code
@@ -77,51 +84,41 @@ const RepoDetail = () => {
           <Tabs.Tab value="messages" icon={<IconMessageCircle size="0.8rem" />}>
             Issues
           </Tabs.Tab>
-          {/* <Tabs.Tab value="settings">Settings</Tabs.Tab> */}
         </Tabs.List>
 
         <Tabs.Panel value="code" pt="xs">
-          {/* TODO: render detail component */}
-          <Card align="center" mah="50px" shadow="sm" padding="xs" radius="md">
-            <Text align="center" weight={500}>
-              <Flex direction="row" justify="space-between">
-                <Flex>Repo ID:{data.id}</Flex>
-                <Flex>RepoName :{data.name}</Flex>
-                <Flex>
-                  {` ${
-                    data.private
-                      ? "Repository is private"
-                      : "Repository is public"
-                  } `}
-                </Flex>
-                <Button
-                  align="center"
-                  variant="light"
-                  color="blue"
-                  radius="xl"
-                  size="sm"
-                  onClick={deleteRepoHandler}
-                >
-                  Delete this repository
-                </Button>
-              </Flex>
-            </Text>
-          </Card>
+          <CodeTabCard data={data} deleteRepoHandler={deleteRepoHandler} />
         </Tabs.Panel>
 
         <Tabs.Panel value="messages" pt="xs">
-          {/* TODO: render issues component */}
+          <Card
+            // key={item.id}
+            display={"flex"}
+            style={{ height: "75px" }}
+            shadow="sm"
+            padding="sm"
+            radius="md"
+            withBorder
+          >
+            <Card
+              align="center"
+              mah="500px"
+              shadow="sm"
+              padding="xs"
+              radius="md"
+            >
+              <Text align="center" weight={500}>
+                <>{itemId}</>
+                <Flex direction="row" justify="space-between"></Flex>
+              </Text>
+            </Card>
+          </Card>
           <Card align="center" mah="500px" shadow="sm" padding="xs" radius="md">
             <Text align="center" weight={500}>
-              <Flex direction="row" justify="space-between">
-                ISSUES TABLE
-              </Flex>
+              <BrowseIssuesTab itemId={itemId} />
+              <Flex direction="row" justify="space-between"></Flex>
             </Text>
           </Card>
-        </Tabs.Panel>
-
-        <Tabs.Panel value="settings" pt="xs">
-          Settings tab content
         </Tabs.Panel>
       </Tabs>
     </>

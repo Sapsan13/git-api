@@ -10,7 +10,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { Button, Input } from "@mantine/core";
 import { IconSTurnDown } from "@tabler/icons-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { personalKey } from "../personalKey";
+import { personalKey } from "../../personalKey";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRef } from "react";
 
@@ -105,7 +105,7 @@ const IssueCreate = () => {
 
         <RichTextEditor.Content maw="990px" />
       </RichTextEditor>
-      <Button onClick={() => mutation.mutate()}>Add an issue </Button>
+      <Button onClick={mutation.mutate}>Add an issue </Button>
     </>
   );
 };

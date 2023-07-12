@@ -4,7 +4,7 @@ import { Outlet, RouteObject, useRoutes } from "react-router-dom";
 import Repositories from "./Components/Repositories";
 import CreateRepository from "./Components/CreateRepository";
 import RepoDetail from "./Components/RepoDetail";
-import IssueCreate from "./Components/IssueCreate";
+import IssueCreate from "./Components/Layout/Issues/IssueCreate";
 
 const Home = () => {
   return <p>Home</p>;
